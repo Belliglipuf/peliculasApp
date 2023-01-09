@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { NovedadesResponse } from '../interfaces/novedades_response.interface';
+import { EMPTY, map, Observable, of, tap } from 'rxjs';
+import { Movie, NovedadesResponse } from '../interfaces/novedades_response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,33 @@ import { NovedadesResponse } from '../interfaces/novedades_response.interface';
 
 export class PeliculasService {
 
-  mainUrl = 'https://api.themoviedb.org/3/movie/';
-  apiKey = '231d38bd3926c00c7316804563c2be03'
+  private mainUrl = 'https://api.themoviedb.org/3/movie/';
+  private carteleraPage = 1;
+  public cargando: boolean = false;
 
   constructor(private http: HttpClient) { }
 
+  get params () {
+    return {
+      api_key:'231d38bd3926c00c7316804563c2be03',
+      language: 'es-ES',
+      page: this.carteleraPage.toString()
+    }
+  }
 
+  getMovies(): Observable<Movie[]> {
 
-
-  getMovies(): Observable<NovedadesResponse> {
-    return this.http.get<NovedadesResponse>(`${this.mainUrl}now_playing?api_key=${this.apiKey}&language=es-ES&page=1`)
+     if(this.cargando){
+      return of([]);
+     }
+    this.cargando = true;
+    return this.http.get<NovedadesResponse>(`${this.mainUrl}now_playing`, {params: this.params})
+    .pipe(
+      map((resp) => resp.results),
+      tap( () => {
+        this.carteleraPage += 1;
+        this.cargando = false;
+      })
+    )
   }
 }

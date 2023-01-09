@@ -5,6 +5,8 @@ import { CardComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { SliderComponent } from './slider/slider.component';
 import { MoviesGridComponent } from './movies-grid/movies-grid.component';
+import { RatingModule } from 'ng-starrating';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -25,7 +27,9 @@ import { MoviesGridComponent } from './movies-grid/movies-grid.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    RatingModule,
+    PipesModule
   ]
 })
 export class ComponentsModule { }

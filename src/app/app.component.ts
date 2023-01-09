@@ -9,19 +9,6 @@ import { PeliculasService } from './services/peliculas.service';
 })
 export class AppComponent {
 
-
-  movies: any;
-
-    title = 'peliculasApp';
-
-    constructor(private _peliculasService: PeliculasService){
-     this._peliculasService.getMovies().subscribe((peliculas) => {
-        this.movies = peliculas;
-     });
-
-     console.log(this.movies);
-
-    }
-
+  title = 'peliculasApp';
 }
 

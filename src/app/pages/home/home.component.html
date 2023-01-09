@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div class="container-fluid">
+  <h1>Cartelera</h1>
+  <div class="row" *ngIf="movies.length > 0">
+    <div class="col">
+      <app-slider [movies]="movies"></app-slider>
+    </div>
+  </div>
+
+  <h1 class="mt-5">Nuevas Películas</h1>
+  <div class="row" *ngIf="movies.length > 0">
+    <div class="col-md-auto">
+      <app-movies-grid [movies]="movies"></app-movies-grid>
+    </div>
+  </div>
+</div>

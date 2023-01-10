@@ -1,0 +1,953 @@
+{
+   "swagger": "2.0",
+   "info": {
+      "description": "API that manages information about product hierarchies.",
+      "version": "1.0.1",
+      "title": "product-hierarchy",
+      "contact": {
+         "name": "Mercadona S.A."
+      }
+   },
+   "tags": [
+      {
+         "name": "Article Hierarchy",
+         "description": "Resources to manage information about Article Hierarchy"
+      },
+      {
+         "name": "Section Hierarchy",
+         "description": "Resources to manage information about Section Hierarchy"
+      }
+   ],
+   "consumes": [
+      "application/json"
+   ],
+   "produces": [
+      "application/json"
+   ],
+   "security": [
+      {
+         "OAuth (External)Application": [
+            "openid"
+         ]
+      }
+   ],
+   "paths": {
+      "/products/hierarchies/section-hierarchy/node-descriptions": {
+         "get": {
+            "tags": [
+               "Section Hierarchy"
+            ],
+            "summary": "Get Node Descriptions of Section Hierarchy",
+            "description": "Get Node Descriptions of Section Hierarchy.",
+            "operationId": "get-products-hierarchies-section-descriptions",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "name": "locale",
+                  "in": "query",
+                  "description": "Favourite language.",
+                  "required": true,
+                  "type": "string",
+                  "default": "es-ES",
+                  "pattern": "^([a-z]{2}-[A-Z]{2})$"
+               },
+               {
+                  "name": "firstPage",
+                  "in": "query",
+                  "description": "Requested page (first page is page 1). If not specified 1 is used. [Cannot be negative].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 1,
+                  "maximum": 99999,
+                  "minimum": 1,
+                  "format": "int32"
+               },
+               {
+                  "name": "pageSize",
+                  "in": "query",
+                  "description": "Number of retrieved elements per page. If not specified 10 is used. [Cannot be less than 1].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 10,
+                  "maximum": 50,
+                  "minimum": 1
+               },
+               {
+                  "name": "orderBy",
+                  "in": "query",
+                  "description": "Parameter to order results by sectionId or sectionDescription. Use '+-' to indicated the direction.",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "name": "sectionDescription",
+                  "in": "query",
+                  "description": "To query by only the Section Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "familyDescription",
+                  "in": "query",
+                  "description": "To query by only the Family Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "subfamilyDescription",
+                  "in": "query",
+                  "description": "To query by only the Subfamily Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "varietyDescription",
+                  "in": "query",
+                  "description": "To query by only the Variety Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "schema": {
+                     "$ref": "#/definitions/SuccessGetHierarchyNodeDescription"
+                  }
+               },
+               "204": {
+                  "description": "No Content."
+               },
+               "400": {
+                  "description": "Bad request or functional error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               },
+               "401": {
+                  "description": "Unauthorized."
+               },
+               "403": {
+                  "description": "Forbidden."
+               },
+               "404": {
+                  "description": "Not Found."
+               },
+               "500": {
+                  "description": "Internal Server Error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               }
+            },
+            "x-axway": {}
+         }
+      },
+      "/products/hierarchies/section-hierarchy": {
+         "get": {
+            "tags": [
+               "Section Hierarchy"
+            ],
+            "summary": "Get Section Hierarchy",
+            "description": "Get Section Hierarchy.",
+            "operationId": "get-products-hierarchies-section",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "name": "locale",
+                  "in": "query",
+                  "description": "Favourite language.",
+                  "required": true,
+                  "type": "string",
+                  "default": "es-ES",
+                  "pattern": "^([a-z]{2}-[A-Z]{2})$"
+               },
+               {
+                  "name": "firstPage",
+                  "in": "query",
+                  "description": "Requested page (first page is page 1). If not specified 1 is used. [Cannot be negative].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 1,
+                  "maximum": 99999,
+                  "minimum": 1,
+                  "format": "int32"
+               },
+               {
+                  "name": "pageSize",
+                  "in": "query",
+                  "description": "Number of retrieved elements per page. If not specified 3 is used. [Cannot be less than 1].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 3,
+                  "maximum": 5,
+                  "minimum": 1
+               },
+               {
+                  "name": "orderBy",
+                  "in": "query",
+                  "description": "Parameter to order results by sectionId or sectionDescription. Use '+-' to indicated the direction.",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "name": "sectionId",
+                  "in": "query",
+                  "description": "Section Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 2,
+                  "minLength": 2,
+                  "pattern": "[0-9]{2}"
+               },
+               {
+                  "name": "familyId",
+                  "in": "query",
+                  "description": "Family Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 4,
+                  "minLength": 4,
+                  "pattern": "[0-9]{4}"
+               },
+               {
+                  "name": "subfamilyId",
+                  "in": "query",
+                  "description": "Subfamily Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 6,
+                  "minLength": 6,
+                  "pattern": "[0-9]{6}"
+               },
+               {
+                  "name": "varietyId",
+                  "in": "query",
+                  "description": "Variety Identifier",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 8,
+                  "minLength": 8,
+                  "pattern": "[0-9]{8}"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK.",
+                  "schema": {
+                     "$ref": "#/definitions/SuccessGetSectionsHierarchy"
+                  }
+               },
+               "204": {
+                  "description": "No Content."
+               },
+               "400": {
+                  "description": "Bad request or functional error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               },
+               "401": {
+                  "description": "Unauthorized."
+               },
+               "403": {
+                  "description": "Forbidden."
+               },
+               "404": {
+                  "description": "Not Found."
+               },
+               "500": {
+                  "description": "Internal Server Error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               }
+            },
+            "x-axway": {}
+         }
+      },
+      "/products/hierarchies/article-hierarchy/node-descriptions": {
+         "get": {
+            "tags": [
+               "Article Hierarchy"
+            ],
+            "summary": "Get Node Descriptions of Article Hierarchy",
+            "description": "Get Node Descriptions of Article Hierarchy.",
+            "operationId": "get-products-hierarchies-article-descriptions",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "name": "locale",
+                  "in": "query",
+                  "description": "Favourite language.",
+                  "required": true,
+                  "type": "string",
+                  "default": "es-ES",
+                  "pattern": "^([a-z]{2}-[A-Z]{2})$"
+               },
+               {
+                  "name": "firstPage",
+                  "in": "query",
+                  "description": "Requested page (first page is page 1). If not specified 1 is used. [Cannot be negative].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 1,
+                  "maximum": 99999,
+                  "minimum": 1,
+                  "format": "int32"
+               },
+               {
+                  "name": "pageSize",
+                  "in": "query",
+                  "description": "Number of retrieved elements per page. If not specified 10 is used. [Cannot be less than 1].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 10,
+                  "maximum": 50,
+                  "minimum": 1
+               },
+               {
+                  "name": "orderBy",
+                  "in": "query",
+                  "description": "Parameter to order results by businessId or businessDescription. Use '+-' to indicated the direction.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 1
+               },
+               {
+                  "name": "businessDescription",
+                  "in": "query",
+                  "description": "To query by only the Business Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "categoryDescription",
+                  "in": "query",
+                  "description": "To query by only the Category Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "subcategoryDescription",
+                  "in": "query",
+                  "description": "To query by only the Subcategory Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "varietyDescription",
+                  "in": "query",
+                  "description": "To query by only the Variety Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               },
+               {
+                  "name": "subvarietyDescription",
+                  "in": "query",
+                  "description": "To query by only the Subvariety Description, partial or whole.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 40,
+                  "minLength": 0,
+                  "allowEmptyValue": true
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK.",
+                  "schema": {
+                     "$ref": "#/definitions/SuccessGetHierarchyNodeDescription"
+                  }
+               },
+               "204": {
+                  "description": "No Content."
+               },
+               "400": {
+                  "description": "Bad request or functional error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               },
+               "401": {
+                  "description": "Unauthorized."
+               },
+               "403": {
+                  "description": "Forbidden."
+               },
+               "404": {
+                  "description": "Not Found."
+               },
+               "500": {
+                  "description": "Internal Server Error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               }
+            },
+            "x-axway": {}
+         }
+      },
+      "/products/hierarchies/article-hierarchy": {
+         "get": {
+            "tags": [
+               "Article Hierarchy"
+            ],
+            "summary": "Get Article Hierarchy",
+            "description": "Get Article Hierarchy.",
+            "operationId": "get-products-hierarchies-article",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "name": "locale",
+                  "in": "query",
+                  "description": "Favourite language.",
+                  "required": true,
+                  "type": "string",
+                  "default": "es-ES",
+                  "pattern": "^([a-z]{2}-[A-Z]{2})$"
+               },
+               {
+                  "name": "firstPage",
+                  "in": "query",
+                  "description": "Requested page (first page is page 1). If not specified 1 is used. [Cannot be negative].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 1,
+                  "maximum": 99999,
+                  "minimum": 1,
+                  "format": "int32"
+               },
+               {
+                  "name": "pageSize",
+                  "in": "query",
+                  "description": "Number of retrieved elements per page. If not specified 3 is used. [Cannot be less than 1].",
+                  "required": false,
+                  "type": "integer",
+                  "default": 3,
+                  "maximum": 5,
+                  "minimum": 1
+               },
+               {
+                  "name": "orderBy",
+                  "in": "query",
+                  "description": "Parameter to order results by businessId or businessDescription. Use '+-' to indicated the direction.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 1
+               },
+               {
+                  "name": "businessId",
+                  "in": "query",
+                  "description": "Business Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 2,
+                  "minLength": 2,
+                  "pattern": "[0-9]{2}"
+               },
+               {
+                  "name": "categoryId",
+                  "in": "query",
+                  "description": "Category Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 5,
+                  "minLength": 5,
+                  "pattern": "[0-9]{5}"
+               },
+               {
+                  "name": "subcategoryId",
+                  "in": "query",
+                  "description": "Subcategory Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 7,
+                  "minLength": 7,
+                  "pattern": "[0-9]{7}"
+               },
+               {
+                  "name": "varietyId",
+                  "in": "query",
+                  "description": "Variety Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 9,
+                  "minLength": 9,
+                  "pattern": "[0-9]{9}"
+               },
+               {
+                  "name": "subvarietyId",
+                  "in": "query",
+                  "description": "Subvariety Identifier.",
+                  "required": false,
+                  "type": "string",
+                  "maxLength": 11,
+                  "minLength": 11,
+                  "pattern": "[0-9]{11}"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK.",
+                  "schema": {
+                     "$ref": "#/definitions/SuccessGetArticlesHierarchy"
+                  }
+               },
+               "204": {
+                  "description": "No Content."
+               },
+               "400": {
+                  "description": "Bad request or functional error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               },
+               "401": {
+                  "description": "Unauthorized."
+               },
+               "403": {
+                  "description": "Forbidden."
+               },
+               "404": {
+                  "description": "Not Found."
+               },
+               "500": {
+                  "description": "Internal Server Error.",
+                  "schema": {
+                     "$ref": "#/definitions/Structural.v1_0_4_ErrorModel"
+                  }
+               }
+            },
+            "x-axway": {}
+         }
+      }
+   },
+   "securityDefinitions": {
+      "OAuth (External)Application": {
+         "description": "OAuth (External)",
+         "type": "oauth2",
+         "tokenUrl": "https://localhost:8089/api/oauth/token",
+         "flow": "application",
+         "scopes": {
+            "openid": ""
+         },
+         "x-axway": {
+            "tokenName": "access_token",
+            "scopesMatching": "Any",
+            "accessTokenLocation": "HEADER",
+            "typeDisplayName": "OAuth 2.0",
+            "authorizationHeaderPrefix": "Bearer"
+         }
+      }
+   },
+   "definitions": {
+      "ArticleHierarchy_GR.v1": {
+         "type": "object",
+         "properties": {
+            "business": {
+               "type": "array",
+               "items": {
+                  "type": "object",
+                  "allOf": [
+                     {
+                        "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                     },
+                     {
+                        "type": "object",
+                        "properties": {
+                           "category": {
+                              "type": "array",
+                              "items": {
+                                 "type": "object",
+                                 "allOf": [
+                                    {
+                                       "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                    },
+                                    {
+                                       "type": "object",
+                                       "properties": {
+                                          "subcategory": {
+                                             "type": "array",
+                                             "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                   {
+                                                      "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                                   },
+                                                   {
+                                                      "type": "object",
+                                                      "properties": {
+                                                         "variety": {
+                                                            "type": "array",
+                                                            "items": {
+                                                               "type": "object",
+                                                               "allOf": [
+                                                                  {
+                                                                     "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                                                  },
+                                                                  {
+                                                                     "type": "object",
+                                                                     "properties": {
+                                                                        "subvariety": {
+                                                                           "type": "array",
+                                                                           "items": {
+                                                                              "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                                                           }
+                                                                        }
+                                                                     }
+                                                                  }
+                                                               ]
+                                                            }
+                                                         }
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          }
+                                       }
+                                    }
+                                 ]
+                              }
+                           }
+                        }
+                     }
+                  ]
+               }
+            }
+         },
+         "title": "Article Hierarchy",
+         "description": "Characteristics which represent the Article Hierarchy."
+      },
+      "SuccessGetArticlesHierarchy": {
+         "type": "object",
+         "properties": {
+            "metadata": {
+               "type": "object",
+               "properties": {}
+            },
+            "data": {
+               "$ref": "#/definitions/ArticleHierarchy_GR.v1"
+            },
+            "pagination": {
+               "$ref": "#/definitions/Structural.v1_0_3_PaginationModel"
+            }
+         },
+         "title": "SuccessGetArticlesHierarchy"
+      },
+      "SuccessGetHierarchyNodeDescription": {
+         "type": "object",
+         "properties": {
+            "metadata": {
+               "type": "object",
+               "properties": {}
+            },
+            "data": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/definitions/HierarchyLevel_CM.v1"
+               }
+            },
+            "pagination": {
+               "$ref": "#/definitions/Structural.v1_0_3_2_PaginationModel"
+            }
+         },
+         "title": "SuccessGetHierarchyNodeDescription"
+      },
+      "SectionHierarchy_GR.v1": {
+         "type": "object",
+         "properties": {
+            "section": {
+               "type": "array",
+               "items": {
+                  "type": "object",
+                  "allOf": [
+                     {
+                        "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                     },
+                     {
+                        "type": "object",
+                        "properties": {
+                           "family": {
+                              "type": "array",
+                              "items": {
+                                 "type": "object",
+                                 "allOf": [
+                                    {
+                                       "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                    },
+                                    {
+                                       "type": "object",
+                                       "properties": {
+                                          "subfamily": {
+                                             "type": "array",
+                                             "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                   {
+                                                      "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                                   },
+                                                   {
+                                                      "type": "object",
+                                                      "properties": {
+                                                         "variety": {
+                                                            "type": "array",
+                                                            "items": {
+                                                               "type": "object",
+                                                               "allOf": [
+                                                                  {
+                                                                     "$ref": "#/definitions/HierarchyLevel_CM.v1"
+                                                                  }
+                                                               ]
+                                                            }
+                                                         }
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          }
+                                       }
+                                    }
+                                 ]
+                              }
+                           }
+                        }
+                     }
+                  ]
+               }
+            }
+         },
+         "title": "Article Hierarchy",
+         "description": "Characteristics which represent the Article Hierarchy."
+      },
+      "HierarchyLevel_CM.v1": {
+         "type": "object",
+         "required": [
+            "id"
+         ],
+         "properties": {
+            "id": {
+               "type": "string",
+               "example": "05",
+               "minLength": 2,
+               "maxLength": 11
+            },
+            "description": {
+               "type": "string",
+               "example": "DESCRIPCIÓN NODO JERARQUÍA",
+               "minLength": 1,
+               "maxLength": 40
+            }
+         },
+         "title": "Hierarchy Level",
+         "description": "Characteristics which represent a Hierarchy level."
+      },
+      "Structural.v1_0_4_ErrorModel": {
+         "type": "object",
+         "required": [
+            "code",
+            "description"
+         ],
+         "properties": {
+            "code": {
+               "type": "string",
+               "maxLength": 250
+            },
+            "description": {
+               "type": "string",
+               "maxLength": 1250
+            },
+            "details": {
+               "type": "array",
+               "description": "Detailed backend Error: backend error Id + message text.",
+               "items": {
+                  "$ref": "#/definitions/Structural.v1_0_4_ErrorDetailsModel"
+               }
+            }
+         }
+      },
+      "Structural.v1_0_3_PaginationModel": {
+         "type": "object",
+         "properties": {
+            "requestedPage": {
+               "type": "integer",
+               "format": "int32",
+               "example": 2
+            },
+            "requestedSize": {
+               "type": "integer",
+               "format": "int32",
+               "example": 20
+            },
+            "retrievedResults": {
+               "type": "integer",
+               "format": "int32",
+               "example": 20
+            },
+            "totalResults": {
+               "type": "integer",
+               "format": "int64",
+               "example": 100
+            },
+            "nextPage": {
+               "type": "string",
+               "example": "https://api.example.com/information-domain/main-resources/v1/main-resource?firstPage=2&pageSize=10",
+               "maxLength": 2000
+            },
+            "previousPage": {
+               "type": "string",
+               "example": "https://api.example.com/information-domain/main-resources/v1/main-resource?firstPage=1&pageSize=10",
+               "maxLength": 2000
+            }
+         }
+      },
+      "Structural.v1_0_3_2_PaginationModel": {
+         "type": "object",
+         "properties": {
+            "requestedPage": {
+               "type": "integer",
+               "format": "int32",
+               "example": 2
+            },
+            "requestedSize": {
+               "type": "integer",
+               "format": "int32",
+               "example": 20
+            },
+            "retrievedResults": {
+               "type": "integer",
+               "format": "int32",
+               "example": 20
+            },
+            "totalResults": {
+               "type": "integer",
+               "format": "int64",
+               "example": 100
+            },
+            "nextPage": {
+               "type": "string",
+               "example": "https://api.example.com/information-domain/main-resources/v1/main-resource?firstPage=2&pageSize=10",
+               "maxLength": 2000
+            },
+            "previousPage": {
+               "type": "string",
+               "example": "https://api.example.com/information-domain/main-resources/v1/main-resource?firstPage=1&pageSize=10",
+               "maxLength": 2000
+            }
+         }
+      },
+      "SuccessGetSectionsHierarchy": {
+         "type": "object",
+         "properties": {
+            "metadata": {
+               "type": "object",
+               "properties": {}
+            },
+            "data": {
+               "$ref": "#/definitions/SectionHierarchy_GR.v1"
+            },
+            "pagination": {
+               "$ref": "#/definitions/Structural.v1_0_3_PaginationModel"
+            }
+         },
+         "title": "SuccessGetArticleHierarchy"
+      },
+      "Structural.v1_0_4_ErrorDetailsModel": {
+         "type": "object",
+         "properties": {
+            "code": {
+               "type": "string",
+               "example": "",
+               "maxLength": 500
+            },
+            "message": {
+               "type": "string",
+               "maxLength": 2000
+            }
+         }
+      }
+   },
+   "x-axway": {
+      "serviceType": "rest",
+      "basePaths": [
+         "https://api.itg.gcp.mercadona.com",
+         "http://api.itg.gcp.mercadona.com"
+      ],
+      "retirementDate": 0,
+      "corsEnabled": true,
+      "deprecated": false,
+      "availableSDK": {
+         "ios-swift": "/discovery/sdk/68380ca6-8ec9-4d8f-b849-3e3afa1e6a65/ios-swift",
+         "titanium": "/discovery/sdk/68380ca6-8ec9-4d8f-b849-3e3afa1e6a65/titanium",
+         "android": "/discovery/sdk/68380ca6-8ec9-4d8f-b849-3e3afa1e6a65/android",
+         "nodejs": "/discovery/sdk/68380ca6-8ec9-4d8f-b849-3e3afa1e6a65/nodejs"
+      },
+      "apiResourceType": "swagger20",
+      "accessGrantedDate": 1664468499561,
+      "tags": {
+         "LOCATION": [
+            "GKE"
+         ],
+         "OWNER_USER": [
+            "jsolerto"
+         ],
+         "DOMAIN": [
+            "product-assortment"
+         ],
+         "ZONE": [
+            "LAN"
+         ],
+         "API": [
+            "concept"
+         ],
+         "ENV": [
+            "ITG"
+         ]
+      },
+      "expired": false,
+      "customProperties": {
+         "validateRequest": "true"
+      },
+      "id": "68380ca6-8ec9-4d8f-b849-3e3afa1e6a65",
+      "state": "published"
+   },
+   "host": "api.itg.gcp.mercadona.com:443",
+   "schemes": [
+      "https"
+   ],
+   "basePath": "/product-assortment/product/product-hierarchy/v1"
+}

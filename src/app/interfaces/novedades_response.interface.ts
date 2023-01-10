@@ -32,3 +32,10 @@ export enum OriginalLanguage {
   En = "en",
   ID = "id",
 }
+
+export interface SearchResponse {
+  page:          number;
+  results:       Movie[];
+  total_pages:   number;
+  total_results: number;
+}

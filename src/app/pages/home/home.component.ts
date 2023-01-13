@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public movies: Movie[] = [];
   public moviesSlide: Movie[] = [];
-  public cargandoGrid: boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
@@ -37,18 +36,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   masPeliculas() {
     if (!this._peliculasService.cargando) {
-      this._peliculasService.getMovies().subscribe({
+
+       this._peliculasService.getMovies().subscribe({
         next: (movies) => {
-          this.cargandoGrid = true;
-          console.log('Cargando peliculas');
           this.movies.push(...movies)
         },
         error: (err) => {
           console.log(err);
         },
         complete: () => {
-          this.cargandoGrid = false;
-          console.log('Dejó de carga');
         }
       })
     } else {return;}

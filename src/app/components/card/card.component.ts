@@ -19,14 +19,6 @@ export class CardComponent {
 
   @Output() idPelicula = new EventEmitter<number>();
 
-  usuario = {
-    name: 'Nombre',
-    lastname: 'Apellido',
-    role: [
-      'admin',
-      'user'
-    ]
-  }
 
   constructor(private router: Router) {
 
@@ -42,7 +34,7 @@ export class CardComponent {
 
   esAdmin(): boolean {
 
-    return this.usuario.role.includes('admin');
+   return false;
 
   }
 

@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'movie/:id', component:MovieComponent},
   {path: 'search/:texto', component:SearchComponent},
+  {path: 'auth', loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)},
   {path: '**', pathMatch:'full', redirectTo: 'home'},
 ];
 

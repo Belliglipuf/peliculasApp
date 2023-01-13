@@ -1,4 +1,27 @@
+.navbar {
+  background: rgba(0, 0, 0, 0);
+}
+
 .navbar-brand{
     color: white !important;
     font-size: 25px;
     }
+
+.navbar-inverse {
+  background: #000000;
+  transition: 0.5s all ease-in-out;
+  -webkit-transition: 0.5s all ease-in-out;
+  -moz-transition: 0.5s all ease-in-out;
+  -ms-transition: 0.5s all ease-in-out;
+  -o-transition: 0.5s all ease-in-out;
+}
+
+
+.navbar-inverse-back {
+  background-color: rgba(0, 0, 0, 0);
+  transition: 0.5s all ease-in-out;
+  -webkit-transition: 0.5s all ease-in-out;
+  -moz-transition: 0.5s all ease-in-out;
+  -ms-transition: 0.5s all ease-in-out;
+  -o-transition: 0.5s all ease-in-out;
+}

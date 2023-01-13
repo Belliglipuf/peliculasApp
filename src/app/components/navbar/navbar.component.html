@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark ">
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top" (scroll)="onWindowScroll();">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="home">
       <img src="assets/img/logo.png" alt="" width="35" height="35" class="d-inline-block align-text-top">
@@ -13,7 +13,7 @@
       </ul>
       <div class="d-flex">
         <input #txtBuscar (keyup.enter)="buscarPelicula(txtBuscar.value)" class="form-control me-2" type="search" placeholder="Buscar pelicula..." aria-label="Search">
-        <button class="btn btn-outline-light" (click)="buscarPelicula(txtBuscar.value)" type="submit">Buscar</button>
+        <button class="btn btn-outline-light" (click)="buscarPelicula(txtBuscar.value)" type="submit"><i class="bi bi-search"></i>Buscar</button>
       </div>
     </div>
   </div>

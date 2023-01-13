@@ -1,11 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CastingResponse } from 'src/app/interfaces/casting_response.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError } from 'rxjs';
+import { Cast } from 'src/app/interfaces/casting_response.interface';
 import { MovieResponse } from 'src/app/interfaces/movie_response.interface';
 import { PeliculasService } from 'src/app/services/peliculas.service';
-import { Cast } from '../../../../.history/src/app/interfaces/casting_response.interface_20230110162619';
-
 
 @Component({
   selector: 'app-movie',
@@ -20,33 +19,43 @@ export class MovieComponent implements OnInit {
   casting: Cast[];
   cargando: boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private peliculasService: PeliculasService, private location: Location){
+  constructor(private activatedRoute: ActivatedRoute, private peliculasService: PeliculasService, private location: Location, private router: Router) {
 
   }
 
   ngOnInit(): void {
 
 
-    this.activatedRoute.params.subscribe( resp => {
-      ({id: this.id} = resp);
+    this.activatedRoute.params.subscribe(resp => {
+      ({ id: this.id } = resp);
     })
 
-    this.cargando = true;
     this.peliculasService.detailMovie(this.id).subscribe(resp => {
       this.movie = resp;
-      this.cargando = false;
+
     });
 
-    this.peliculasService.getCastingMovie(this.id).subscribe(resp => {
-      if (!this.cargando) this.cargando = true;
-      this.casting = resp;
-    })
+    console.log(this.cargando);
 
+    this.peliculasService.getCastingMovie(this.id).subscribe({
+      next: (casting) => {
+        this.cargando = true;
+        this.casting = casting;
+      },
+      error: (error) => {
+        if (error.status === 404){
+          this.router.navigateByUrl('home')
+        }
+      },
+      complete: () => {
+        this.cargando = false;
+        console.log(this.cargando);
+      }
+    })
   }
 
-
   regresar() {
-      this.location.back();
+    this.location.back();
   }
 
 }

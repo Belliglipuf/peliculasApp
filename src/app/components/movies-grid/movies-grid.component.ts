@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Movie } from 'src/app/interfaces/novedades_response.interface';
-import { PeliculasService } from 'src/app/services/peliculas.service';
 
 @Component({
   selector: 'app-movies-grid',
@@ -17,12 +15,14 @@ export class MoviesGridComponent {
   @Input()
   movies: Movie [];
 
-  constructor(private router: Router) {
+  constructor() {
 
   }
 
-  abrirPelicula(id: number) {
-    this.router.navigate(['/movie', id]);
+  borrarPelicula(id: number){
+    const indexObject = this.movies.findIndex(movie => movie.id === id);
+    this.movies.splice(indexObject, 1);
+      console.log(this.movies.filter(movie => movie.id === id));
   }
 
 

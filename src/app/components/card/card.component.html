@@ -1,4 +1,10 @@
-<img [src]="movie.poster_path | poster" class="img-fluid poster">
+<div class="contenedor">
+  <div class="contenedor-poster">
+    <img (click)="abrirPelicula(movie.id)" [src]="movie.poster_path | poster" class="img-fluid poster">
+    <button *ngIf="esAdmin()" type="button" (click)="borrarPelicula(movie.id)" class="btn btn-primary" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 <div>
   <h3>{{movie.title}}</h3>
   <div class="row">
@@ -8,4 +14,5 @@
     <div class="col-2 text-white">  {{movie.vote_average | number:'1.1-2'}}
     </div>
   </div>
+</div>
 </div>

@@ -1,9 +1,58 @@
 .poster {
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-  margin: 5px;
+  width: 100%;
+  transition: 0.5s all ease-in-out;
+  -webkit-transition: 0.5s all ease-in-out;
+  -moz-transition: 0.5s all ease-in-out;
+  -ms-transition: 0.5s all ease-in-out;
+  -o-transition: 0.5s all ease-in-out;
+
 }
+
+.poster:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+.contenedor-poster {
+  overflow: hidden;
+}
+
 
 h3 {
   font-size: 15px;
+}
+
+.contenedor {
+  position: relative;
+}
+
+.contenedor .btn {
+  position: absolute;
+  top: 5%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 30px;
+  padding: 0px;
+  margin: 0;
+}
+
+.contenedor .btn span {
+
+    font-size: 25px;
+    padding: 0px;
+
+}
+
+.contenedor img {
+ cursor: pointer;
 }

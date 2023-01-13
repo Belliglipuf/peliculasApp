@@ -7,6 +7,7 @@ import { SliderComponent } from './slider/slider.component';
 import { MoviesGridComponent } from './movies-grid/movies-grid.component';
 import { RatingModule } from 'ng-starrating';
 import { PipesModule } from '../pipes/pipes.module';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
@@ -18,18 +19,19 @@ import { PipesModule } from '../pipes/pipes.module';
     NavbarComponent,
     CardComponent,
     SliderComponent,
-    MoviesGridComponent
-  ],
+    MoviesGridComponent,
+    SpinnerComponent
+    ],
   exports: [
     NavbarComponent,
     SliderComponent,
-    MoviesGridComponent
-  ],
+    MoviesGridComponent,
+    SpinnerComponent
+    ],
   imports: [
     CommonModule,
     RouterModule,
     RatingModule,
-    PipesModule
-  ]
+    PipesModule  ]
 })
 export class ComponentsModule { }
